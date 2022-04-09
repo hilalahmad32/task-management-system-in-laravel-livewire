@@ -99,27 +99,38 @@ class Task extends Component
     public function update($id)
     {
         $tasks = ModelsTask::findOrFail($id);
-        $validate = $this->validate([
-            'edit_cat_id' => ['required'],
-            'edit_user_id' => ['required'],
-            'edit_title' => ['required'],
-            'edit_description' => ['required'],
-            'edit_start_date' => ['required'],
-            'edit_status' => ['required'],
-            'edit_end_date' => ['required'],
-        ]);
-        $tasks->cat_id = $this->edit_cat_id;
-        $tasks->user_id = $this->edit_user_id;
-        $tasks->title = $this->edit_title;
-        $tasks->description = $this->edit_description;
-        $tasks->status = $this->edit_status;
-        $tasks->start_date = $this->edit_start_date;
-        $tasks->end_date = $this->edit_end_date;
-        $result = $tasks->save();
 
-        if ($result) {
-            $this->resetField();
-            $this->emit('updateTasks');
+        if (Auth::check()) {
+            $tasks->status = $this->edit_status;
+            $result = $tasks->save();
+
+            if ($result) {
+                $this->resetField();
+                $this->emit('updateTasks');
+            }
+        } else {
+            $validate = $this->validate([
+                'edit_cat_id' => ['required'],
+                'edit_user_id' => ['required'],
+                'edit_title' => ['required'],
+                'edit_description' => ['required'],
+                'edit_start_date' => ['required'],
+                'edit_status' => ['required'],
+                'edit_end_date' => ['required'],
+            ]);
+            $tasks->cat_id = $this->edit_cat_id;
+            $tasks->user_id = $this->edit_user_id;
+            $tasks->title = $this->edit_title;
+            $tasks->description = $this->edit_description;
+            $tasks->status = $this->edit_status;
+            $tasks->start_date = $this->edit_start_date;
+            $tasks->end_date = $this->edit_end_date;
+            $result = $tasks->save();
+
+            if ($result) {
+                $this->resetField();
+                $this->emit('updateTasks');
+            }
         }
     }
 
