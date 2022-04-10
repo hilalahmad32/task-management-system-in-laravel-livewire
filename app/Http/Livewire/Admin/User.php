@@ -6,6 +6,7 @@ use App\Models\User as ModelsUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class User extends Component
 {
@@ -21,9 +22,15 @@ class User extends Component
     public $edit_email;
     public $edit_phone;
 
+    use WithPagination;
+
+    public function paginationView()
+    {
+        return 'custom-pagination-links-view';
+    }
     public function render()
     {
-        $users = ModelsUser::orderBy('id', 'desc')->get();
+        $users = ModelsUser::orderBy('id', 'desc')->paginate(3);
         return view('livewire.admin.user', compact('users'))->layout('layout.admin-app');
     }
 

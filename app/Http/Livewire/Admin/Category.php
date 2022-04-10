@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Category as ModelsCategory;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Category extends Component
 {
@@ -13,10 +14,17 @@ class Category extends Component
     public $edit_id;
     public $edit_category_name;
     public $edit_description;
+
+    use WithPagination;
+
+    public function paginationView()
+    {
+        return 'custom-pagination-links-view';
+    }
     public function render()
     {
 
-        $categories = ModelsCategory::orderBy('id', 'desc')->get();
+        $categories = ModelsCategory::orderBy('id', 'desc')->paginate(3);
         return view('livewire.admin.category', compact('categories'))->layout('layout.admin-app');
     }
 

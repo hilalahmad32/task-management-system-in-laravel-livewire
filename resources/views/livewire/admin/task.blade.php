@@ -82,14 +82,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-success ml-1">Prev</button>
-                        <button class="btn btn-success ml-1">1</button>
-                        <button class="btn btn-secondary ml-1">2</button>
-                        <button class="btn btn-success ml-1">3</button>
-                        <button class="btn btn-success ml-1">4</button>
-                        <button class="btn btn-success ml-1">Next</button>
-                    </div>
+                    {{ $tasks->links('custom-pagination-links-view') }}
+
                 </div>
             </div>
         </div>

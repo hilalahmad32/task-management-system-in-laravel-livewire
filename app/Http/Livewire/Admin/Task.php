@@ -7,6 +7,7 @@ use App\Models\Task as ModelsTask;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Task extends Component
 {
@@ -29,18 +30,25 @@ class Task extends Component
 
     public $categories,
         $users;
+
+    use WithPagination;
+
+    public function paginationView()
+    {
+        return 'custom-pagination-links-view';
+    }
     public function render()
     {
         $this->users = User::all();
         $this->categories = Category::all();
         if (!Auth::guard('admin')->user()) {
             if (Auth::user()->id) {
-                $tasks = ModelsTask::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+                $tasks = ModelsTask::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(3);
                 return view('livewire.admin.task', compact('tasks'))->layout('layout.admin-app');
             }
         }
 
-        $tasks = ModelsTask::orderBy('id', 'desc')->get();
+        $tasks = ModelsTask::orderBy('id', 'desc')->paginate(3);
         return view('livewire.admin.task', compact('tasks'))->layout('layout.admin-app');
     }
 
