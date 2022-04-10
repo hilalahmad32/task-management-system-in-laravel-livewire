@@ -17,7 +17,10 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex my-2">
-                        <button class="btn btn-secondary">PDF</button>
+                        <a href="{{ route('admin.userexportPDF') }}">
+                            <button class="btn btn-secondary">PDF</button>
+
+                        </a>
                         <button class="btn btn-secondary ml-3">Print</button>
                     </div>
                     <div class="table-responsive">

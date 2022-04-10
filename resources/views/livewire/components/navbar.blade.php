@@ -5,9 +5,19 @@
     <ul class="navbar-nav ml-auto ">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Hi Admin</a>
+                aria-haspopup="true" aria-expanded="false">
+                @if (Auth::guard('admin')->user())
+                    {{ Auth::guard('admin')->user()->username }}
+                @else
+                    {{ Auth::user()->fname }}
+                    {{ Auth::user()->lname }}
+                @endif
+            </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Change Password</a>
+                @if (Auth::guard('admin')->user())
+                    <a class="dropdown-item" href="{{ route('admin.changePassword') }}">Change Password</a>
+                    <a class="dropdown-item" href="{{ route('admin.updateProfile') }}">Edit Profile</a>
+                @endif
                 <div class="dropdown-divider"></div>
                 @if (!Auth::guard('admin')->user())
                     @livewire('user.auth.logout')

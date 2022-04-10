@@ -17,9 +17,12 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex my-2 ">
-                        <button class="btn btn-secondary">PDF</button>
-                        <button class="btn btn-secondary ml-3">Print</button>
-
+                        @if (Auth::guard('admin')->user())
+                            <a href="{{ route('admin.exportPDF') }}">
+                                <button class="btn btn-secondary">PDF</button>
+                            </a>
+                            <button class="btn btn-secondary ml-3">Print</button>
+                        @endif
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered">

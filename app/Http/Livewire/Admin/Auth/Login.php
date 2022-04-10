@@ -25,7 +25,10 @@ class Login extends Component
         if ($admins) {
             $this->username = "";
             $this->password = "";
+            session()->flash('success', 'Login Successfully');
             return redirect(route('admin.dashboard'));
+        } else {
+            session()->flash('error', 'Invalid Username and password');
         }
     }
 }

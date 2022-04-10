@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Category as ModelsCategory;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Category extends Component
 {
@@ -14,7 +15,7 @@ class Category extends Component
     public $edit_id;
     public $edit_category_name;
     public $edit_description;
-
+    public $updateData = false;
     use WithPagination;
 
     public function paginationView()
@@ -55,6 +56,7 @@ class Category extends Component
 
     public function editCategory($id)
     {
+        $this->updateData = true;
         $category = ModelsCategory::findOrFail($id);
         $this->edit_id = $category->id;
         $this->edit_category_name = $category->category_name;
@@ -84,5 +86,12 @@ class Category extends Component
         if ($result) {
             session()->flash('success', 'Category Delete Successfully');
         }
+    }
+
+    public function exportPDF()
+    {
+        $categories = Category::all();
+        $pdf = PDF::loadView('livewire.admin.category', [$categories]);
+        return $pdf->download('invoice.pdf');
     }
 }
