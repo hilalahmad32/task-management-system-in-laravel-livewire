@@ -4,13 +4,12 @@
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Core</div>
 
-                @auth
+                @if (!Auth::guard('admin')->user())
                     <a class="nav-link" href="{{ route('users.tasks') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Tasks
                     </a>
-                @endauth
-                @guest
+                @else
                     <a class="nav-link" href="{{ route('admin.dashboard') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
@@ -27,15 +26,20 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         User
                     </a>
-                </div>
-            @endguest
+            </div>
+            @endif
 
         </div>
         <div class="sb-sidenav-footer bg-secondary">
             <div class="small">Logged in as:</div>
-            @auth
+            @if (Auth::guard('admin')->user())
+                {{ Auth::guard('admin')->user()->username }}
+            @else
                 {{ Auth::user()->fname }}
                 {{ Auth::user()->lname }}
+            @endif
+            @auth
+
             @endauth
         </div>
     </nav>

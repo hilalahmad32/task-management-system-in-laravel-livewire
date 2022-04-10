@@ -10,16 +10,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', AuthLogin::class)->name('users.login');
 Route::middleware(['auth'])->group(function () {
-    Route::get('/users', Task::class)->name('users.tasks');
+    Route::get('/users/tasks', Task::class)->name('users.tasks');
 });
 Route::middleware(['guest'])->group(function () {
     Route::get('/', AuthLogin::class)->name('users.login');
 });
 
-Route::get('/admin', Login::class)->name('admin.login');
-Route::prefix('/admin')->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
-    Route::get('/category', Category::class)->name('admin.category');
-    Route::get('/tasks', Task::class)->name('admin.tasks');
-    Route::get('/users', User::class)->name('admin.users');
+Route::middleware(['guest:admin'])->group(function () {
+    Route::get('/admin', Login::class)->name('admin.login');
+});
+Route::middleware(['auth:admin'])->group(function () {
+    Route::prefix('/admin')->group(function () {
+        Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+        Route::get('/category', Category::class)->name('admin.category');
+        Route::get('/tasks', Task::class)->name('admin.tasks');
+        Route::get('/users', User::class)->name('admin.users');
+    });
 });

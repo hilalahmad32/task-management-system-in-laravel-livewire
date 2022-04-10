@@ -61,6 +61,7 @@ class User extends Component
         if ($result) {
             $this->resetField();
             $this->emit('addUser');
+            session()->flash('success', 'User Add Successfully');
         }
     }
 
@@ -91,10 +92,14 @@ class User extends Component
         if ($result) {
             $this->resetField();
             $this->emit('updateUser');
+            session()->flash('success', 'User Update Successfully');
         }
     }
     public function deleteUser($id)
     {
         $result = ModelsUser::findOrFail($id)->delete();
+        if ($result) {
+            session()->flash('success', 'User Delete Successfully');
+        }
     }
 }

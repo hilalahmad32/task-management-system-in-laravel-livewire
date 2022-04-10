@@ -12,11 +12,12 @@
                     <div class="card bg-primary text-white mb-4">
                         <div class="card-body d-flex justify-content-between">
                             <h4>User</h4>
-                            <h4>44</h4>
+                            <h4>{{ $totalUsers }}</h4>
                         </div>
 
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="{{ route('admin.users') }}">View
+                                Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -25,10 +26,11 @@
                     <div class="card bg-warning text-white mb-4">
                         <div class="card-body d-flex justify-content-between">
                             <h4>Category</h4>
-                            <h4>44</h4>
+                            <h4>{{ $totalCategorys }}</h4>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="{{ route('admin.category') }}">View
+                                Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -37,10 +39,11 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body d-flex justify-content-between">
                             <h4>Task</h4>
-                            <h4>44</h4>
+                            <h4>{{ $totalTasks }}</h4>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="{{ route('admin.tasks') }}">View
+                                Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -49,10 +52,11 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body d-flex justify-content-between">
                             <h4>Complete Tasks</h4>
-                            <h4>44</h4>
+                            <h4>{{ $totalCompleteTasks }}</h4>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="{{ route('admin.tasks') }}">View
+                                Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>

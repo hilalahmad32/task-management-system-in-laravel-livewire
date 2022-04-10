@@ -9,12 +9,12 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Change Password</a>
                 <div class="dropdown-divider"></div>
-                @auth
+                @if (!Auth::guard('admin')->user())
                     @livewire('user.auth.logout')
-                @endauth
-                @guest
-                    {{-- @livewire('auth.logout') --}}
-                @endguest
+                @else
+                    @livewire('admin.auth.logout')
+                @endif
+
             </div>
         </li>
     </ul>

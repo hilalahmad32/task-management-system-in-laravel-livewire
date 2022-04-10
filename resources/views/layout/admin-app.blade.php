@@ -7,10 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin - {{ $title }}</title>
+
+    <title>
+        @if (!Auth::guard('admin')->user())
+            User
+        @else
+            Admin
+        @endif
+        - {{ $title }}
+    </title>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     @livewireStyles
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    {{-- toastr css cdn --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="sb-nav-fixed">
@@ -39,6 +51,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
     </script>
+    {{-- toastrjs cdn --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         window.livewire.on('addCategory', function() {
             $('#addCategory').modal('hide');
@@ -59,6 +75,8 @@
             $('#updateTasks').modal('hide');
         })
     </script>
+
+
 
 </body>
 

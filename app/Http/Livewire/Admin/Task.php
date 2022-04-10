@@ -33,7 +33,7 @@ class Task extends Component
     {
         $this->users = User::all();
         $this->categories = Category::all();
-        if (Auth::check()) {
+        if (!Auth::guard('admin')->user()) {
             if (Auth::user()->id) {
                 $tasks = ModelsTask::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
                 return view('livewire.admin.task', compact('tasks'))->layout('layout.admin-app');
@@ -80,6 +80,7 @@ class Task extends Component
         if ($tasks) {
             $this->resetField();
             $this->emit('addTasks');
+            session()->flash('success', 'Tasks Add successfully');
         }
     }
 
@@ -107,6 +108,7 @@ class Task extends Component
             if ($result) {
                 $this->resetField();
                 $this->emit('updateTasks');
+                session()->flash('success', 'Tasks Update successfully');
             }
         } else {
             $validate = $this->validate([
@@ -130,6 +132,7 @@ class Task extends Component
             if ($result) {
                 $this->resetField();
                 $this->emit('updateTasks');
+                session()->flash('success', 'Tasks Update successfully');
             }
         }
     }
@@ -137,5 +140,8 @@ class Task extends Component
     public function deleteTask($id)
     {
         $result = ModelsTask::findOrFail($id)->delete();
+        if ($result) {
+            session()->flash('success', 'Tasks Delete successfully');
+        }
     }
 }

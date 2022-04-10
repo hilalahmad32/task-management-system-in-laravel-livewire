@@ -9,19 +9,27 @@
                         <div class="card-header bg-danger">
                             <h2>Admin Login</h2>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="">Enter Username</label>
-                                <input type="text" name="" id="" class="form-control">
+                        <form action="" wire:submit.prevent='login'>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="">Enter Username</label>
+                                    <input type="text" wire:model.lazy='username' class="form-control">
+                                    @error('username')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Enter Password</label>
+                                    <input type="password" wire:model.lazy='password' class="form-control">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-danger">Login</button>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="">Enter Password</label>
-                                <input type="password" name="" id="" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-danger">Login</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

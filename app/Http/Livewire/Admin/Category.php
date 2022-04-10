@@ -41,6 +41,7 @@ class Category extends Component
         if ($category) {
             $this->emit('addCategory');
             $this->resetField();
+            session()->flash('success', 'Category Add Successfully');
         }
     }
 
@@ -65,11 +66,15 @@ class Category extends Component
         if ($result) {
             $this->emit('updateCategory');
             $this->resetField();
+            session()->flash('success', 'Category Update Successfully');
         }
     }
 
     public function deleteCategory($id)
     {
         $result = ModelsCategory::findOrFail($id)->delete();
+        if ($result) {
+            session()->flash('success', 'Category Delete Successfully');
+        }
     }
 }
